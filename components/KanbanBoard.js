@@ -16,11 +16,12 @@ const KanbanBoard = () => {
   };
 
   return (
-  <div className='kanban-board'>
-    <Column status='Todo' />
-    <Column status='InProgress' />
-    <Column status='Done' />
-  </div>
-);
+    <div className='kanban-board'>
+      <Column status='Todo' />
+      <Column status='InProgress' />
+      <Column status='Done' />
+    </div>
+  );
+};
 
 export default KanbanBoard;
