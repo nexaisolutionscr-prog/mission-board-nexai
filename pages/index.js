@@ -6,11 +6,11 @@ import { Moon, Sun, Plus, Loader2 } from 'lucide-react';
 import Column from '../src/components/Column';
 import NewTaskModal from '../src/components/NewTaskModal';
 import CostTracker from '../src/components/CostTracker';
-import { useKVTasks } from '../src/hooks/useKVTasks';
+import { useFirebaseTasks } from '../src/hooks/useFirebaseTasks';
 import useDarkMode from '../src/hooks/useDarkMode';
 
 const Home = () => {
-  const { tasks, setTasks, loading, error } = useKVTasks();
+  const { tasks, setTasks, loading, error, addTask, updateTask, deleteTask } = useFirebaseTasks();
   const [modalOpen, setModalOpen] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const { isDark, toggleDarkMode } = useDarkMode();
@@ -28,16 +28,6 @@ const Home = () => {
     { title: 'In Progress', tasks: tasks.filter((task) => task.status === 'In Progress') },
     { title: 'Done', tasks: tasks.filter((task) => task.status === 'Done') }
   ];
-
-  const addTask = (newTask) => {
-    const taskWithId = {
-      ...newTask,
-      id: Date.now().toString(),
-      status: newTask.status || 'To Do',
-      assignee: newTask.assignee || 'none'
-    };
-    setTasks([...tasks, taskWithId]);
-  };
 
   const handleDragStart = (event) => {
     setActiveId(event.active.id);

@@ -17,6 +17,7 @@ export interface Task {
   status: 'To Do' | 'In Progress' | 'Done';
   assignee: 'jose' | 'orbit' | 'none';
   dueDate?: string;
+  createdAt?: any;
 }
 
 export interface Column {
