@@ -6,11 +6,11 @@ import { Moon, Sun, Plus } from 'lucide-react';
 import Column from '../src/components/Column';
 import NewTaskModal from '../src/components/NewTaskModal';
 import CostTracker from '../src/components/CostTracker';
-import useLocalStorage from '../src/hooks/useLocalStorage';
+import useLocalStorageWithMigration from '../src/hooks/useLocalStorageWithMigration';
 import useDarkMode from '../src/hooks/useDarkMode';
 
 const Home = () => {
-  const [tasks, setTasks] = useLocalStorage('tasks', []);
+  const [tasks, setTasks] = useLocalStorageWithMigration('tasks', []);
   const [modalOpen, setModalOpen] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const { isDark, toggleDarkMode } = useDarkMode();
