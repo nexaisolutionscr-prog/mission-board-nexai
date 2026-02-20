@@ -93,7 +93,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, setTasks, allTasks }) => {
         />
         <select
           value={editedTask.priority}
-          onChange={(e) => setEditedTask({ ...editedTask, priority: e.target.value })}
+          onChange={(e) => setEditedTask({ ...editedTask, priority: e.target.value as 'High' | 'Medium' | 'Low' })}
           className="w-full mb-3 p-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
         >
           <option value="High">Alta</option>
