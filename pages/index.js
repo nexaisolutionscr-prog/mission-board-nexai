@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { DndContext, DragOverlay, closestCorners, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { motion } from 'framer-motion';
-import { Moon, Sun, Plus } from 'lucide-react';
+import { Moon, Sun, Plus, Loader2 } from 'lucide-react';
 import Column from '../src/components/Column';
 import NewTaskModal from '../src/components/NewTaskModal';
 import CostTracker from '../src/components/CostTracker';
-import useLocalStorageWithMigration from '../src/hooks/useLocalStorageWithMigration';
+import { useKVTasks } from '../src/hooks/useKVTasks';
 import useDarkMode from '../src/hooks/useDarkMode';
 
 const Home = () => {
-  const [tasks, setTasks] = useLocalStorageWithMigration('tasks', []);
+  const { tasks, setTasks, loading, error } = useKVTasks();
   const [modalOpen, setModalOpen] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const { isDark, toggleDarkMode } = useDarkMode();
@@ -30,7 +30,12 @@ const Home = () => {
   ];
 
   const addTask = (newTask) => {
-    const taskWithId = { ...newTask, id: Date.now().toString(), status: newTask.status || 'To Do' };
+    const taskWithId = {
+      ...newTask,
+      id: Date.now().toString(),
+      status: newTask.status || 'To Do',
+      assignee: newTask.assignee || 'none'
+    };
     setTasks([...tasks, taskWithId]);
   };
 
@@ -61,6 +66,7 @@ const Home = () => {
     const { active, over } = event;
     setActiveId(null);
     if (!over) return;
+
     const activeTask = tasks.find(t => t.id === active.id);
     if (!activeTask) return;
 
@@ -81,6 +87,34 @@ const Home = () => {
   };
 
   const activeTask = activeId ? tasks.find(t => t.id === activeId) : null;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100">
+        <div className="text-center">
+          <Loader2 className="w-12 h-12 animate-spin text-blue-600 mx-auto mb-4" />
+          <p className="text-gray-600">Cargando tareas...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-100">
+        <div className="text-center p-8 bg-white/80 rounded-2xl shadow-xl max-w-md">
+          <p className="text-rose-600 font-semibold mb-2">Error al cargar</p>
+          <p className="text-gray-600">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          >
+            Reintentar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCorners} onDragStart={handleDragStart} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
@@ -120,7 +154,7 @@ const Home = () => {
         </motion.div>
 
         {/* Modal */}
-        <NewTaskModal isOpen={modalOpen} closeModal={() => setModalOpen(false)} saveTask={addTask} initialTask={{ id: '', title: '', description: '', priority: 'Low', status: 'To Do' }} />
+        <NewTaskModal isOpen={modalOpen} closeModal={() => setModalOpen(false)} saveTask={addTask} initialTask={{ id: '', title: '', description: '', priority: 'Low', status: 'To Do', assignee: 'none' }} />
 
         {/* Drag Overlay */}
         <DragOverlay>
