@@ -39,7 +39,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (req.method === 'PUT') {
-      const { task } = req.body;
+      const { task, tasks: bulkTasks } = req.body;
+      
+      // Bulk update (set all tasks)
+      if (bulkTasks && Array.isArray(bulkTasks)) {
+        await kv.set(TASKS_KEY, bulkTasks);
+        return res.status(200).json({ tasks: bulkTasks });
+      }
+      
+      // Single task update
       if (!task || !task.id) {
         return res.status(400).json({ error: 'Task ID required' });
       }
