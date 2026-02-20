@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2026-02-11",
+    "total": 0.0895,
+    "inputTokens": 52000,
+    "outputTokens": 95,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-12",
+    "total": 0.0921,
+    "inputTokens": 58000,
+    "outputTokens": 112,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-13",
+    "total": 0.0873,
+    "inputTokens": 48000,
+    "outputTokens": 89,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-14",
+    "total": 0.0942,
+    "inputTokens": 61000,
+    "outputTokens": 134,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-15",
+    "total": 0.0901,
+    "inputTokens": 55000,
+    "outputTokens": 101,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-16",
+    "total": 0.0934,
+    "inputTokens": 59000,
+    "outputTokens": 120,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-17",
+    "total": 0.0887,
+    "inputTokens": 51000,
+    "outputTokens": 92,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-18",
+    "total": 0.0913,
+    "inputTokens": 54000,
+    "outputTokens": 108,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-19",
+    "total": 0.0917,
+    "inputTokens": 73000,
+    "outputTokens": 107,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-20",
+    "total": 0.09165125,
+    "inputTokens": 73000,
+    "outputTokens": 107,
+    "model": "Kimi K2.5"
+  }
+]

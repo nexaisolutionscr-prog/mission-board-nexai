@@ -37,7 +37,7 @@ const NewTaskModal: React.FC<NewTaskModalProps> = ({ isOpen, closeModal, saveTas
       return;
     }
     saveTask(task);
-    setTask({ id: '', title: '', description: '', priority: 'Low', status: 'To Do' });
+    setTask({ id: '', title: '', description: '', priority: 'Low', status: 'To Do', assignee: 'none' });
     closeModal();
   };
 

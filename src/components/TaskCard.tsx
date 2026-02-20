@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { Task } from '../types';
-import { GripVertical, AlertCircle, Clock, CheckCircle2, Trash2, Pencil } from 'lucide-react';
+import { Task, ASSIGNEES } from '../types';
+import { GripVertical, AlertCircle, Clock, CheckCircle2, Trash2, Pencil, User } from 'lucide-react';
 
 interface TaskCardProps {
   task: Task;
@@ -34,7 +34,12 @@ const priorityConfig = {
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, setTasks, allTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTask, setEditedTask] = useState(task);
+  const [editedTask, setEditedTask] = useState<Task>({
+    ...task,
+    assignee: task.assignee || 'none'
+  });
+  
+  const assignee = ASSIGNEES[task.assignee || 'none'];
 
   const {
     attributes,
@@ -94,6 +99,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, setTasks, allTasks }) => {
           <option value="High">Alta</option>
           <option value="Medium">Media</option>
           <option value="Low">Baja</option>
+        </select>
+        <select value={editedTask.assignee} onChange={(e) => setEditedTask({ ...editedTask, assignee: e.target.value as 'jose' | 'orbit' | 'none' })} className="w-full mb-3 p-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all" >
+          <option value="jose">👤 Jose</option>
+          <option value="orbit">🛰️ ORBIT</option>
+          <option value="none">❓ Sin asignar</option>
         </select>
         <div className="flex gap-2">
           <button
@@ -168,8 +178,8 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, setTasks, allTasks }) => {
       {/* Actions */}
       <div className="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-700/50">
         <div className="flex -space-x-2">
-          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white dark:border-gray-800 flex items-center justify-center">
-            <span className="text-[10px] font-bold text-white">U</span>
+          <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${assignee.color} border-2 border-white dark:border-gray-800 flex items-center justify-center`}>
+            <span className="text-[10px] font-bold text-white">{assignee.avatar}</span>
           </div>
         </div>
         <div className="flex gap-1">
