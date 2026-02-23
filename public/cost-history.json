@@ -1,0 +1,16 @@
+[
+  {
+    "date": "2026-02-21",
+    "total": 0.09165125,
+    "inputTokens": 73000,
+    "outputTokens": 107,
+    "model": "Kimi K2.5"
+  },
+  {
+    "date": "2026-02-22",
+    "total": 0.09165125,
+    "inputTokens": 73000,
+    "outputTokens": 107,
+    "model": "Kimi K2.5"
+  }
+]
