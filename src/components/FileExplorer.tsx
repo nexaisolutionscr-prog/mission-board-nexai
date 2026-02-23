@@ -21,7 +21,11 @@ const FileExplorer: React.FC<FileExplorerProps> = ({ onSelectDocument }) => {
       <h2 className='text-lg font-bold mb-3'>Document Explorer</h2>
       <ul>
         {documents.map(doc => (
-          <li key={doc.id} onClick={() => console.log(`Selected document ID: ${doc.id}`)}>
+          <li 
+            key={doc.id} 
+            onClick={() => onSelectDocument(doc.id)}
+            className="cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors"
+          >
             {doc.title} - {doc.type} - {doc.category}
           </li>
         ))}
