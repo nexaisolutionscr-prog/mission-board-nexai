@@ -5,7 +5,7 @@ import RoundTable from '../src/components/orbot/RoundTable';
 import Workstation from '../src/components/orbot/Workstation';
 import MeetingChat from '../src/components/orbot/MeetingChat';
 import { Agent, AgentId } from '../src/components/orbot/types';
-import { useAgentTasks, TaskRequest, createTask } from '../src/services/agentTaskService';
+import { TaskRequest } from '../src/services/agentTaskService';
 
 // Initial agents data
 const initialAgents: Agent[] = [
