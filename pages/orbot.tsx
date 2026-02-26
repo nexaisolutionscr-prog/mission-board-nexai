@@ -265,7 +265,7 @@ export default function OrbotPage() {
               top: '50%',
             }}
           >
-            <AgentAvatar agent={agent} />
+            <AgentAvatar agent={agent} onClick={() => setSelectedAgent(agent.id)} />
           </motion.div>
         ))}
 
